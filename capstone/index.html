@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capstone Project | Simon Hadush</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --primary: #1A365D;
+      --primary-light: #2B4C7E;
+      --accent: #E67E22;
+      --accent-hover: #D35400;
+      --bg-light: #F8F9FA;
+      --text-dark: #2D3748;
+      --text-light: #4A5568;
+      --white: #FFFFFF;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      line-height: 1.2;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    h4 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+    }
+
+    p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(230, 126, 34, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-small {
+      padding: 8px 20px;
+      font-size: 0.9rem;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 12px 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      color: var(--text-light);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      padding: 70px 0 50px;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+    }
+
+    .hero-content .tagline {
+      font-size: 1.15rem;
+      color: var(--text-light);
+      margin-bottom: 25px;
+    }
+
+    .hero-image {
+      background: var(--primary);
+      border-radius: var(--radius);
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      background-image: url('https://via.placeholder.com/600x300/1A365D/FFFFFF?text=Capstone+Project');
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2::after {
+      margin: 8px auto 0;
+    }
+
+    .section-title p {
+      max-width: 700px;
+      margin: 10px auto 0;
+    }
+
+    /* ===== CARDS & TABLES ===== */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin: 20px 0;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover {
+      background: #f7fafc;
+    }
+
+    /* ===== LISTS ===== */
+    .objective-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .objective-list li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 12px;
+      color: var(--text-light);
+    }
+
+    .objective-list li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ===== CODE BLOCKS ===== */
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ===== ACCORDION ===== */
+    .accordion {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: 18px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .accordion-header:hover {
+      background: #f7fafc;
+    }
+
+    .accordion-header i {
+      transition: var(--transition);
+    }
+
+    .accordion-header.active i {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 24px;
+      background: #f7fafc;
+    }
+
+    .accordion-body.open {
+      max-height: 2000px;
+      padding: 0 24px 24px 24px;
+    }
+
+    /* ===== RESOURCES ===== */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .resource-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .resource-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .resource-card i {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .resource-card h4 {
+      margin-bottom: 8px;
+    }
+
+    .resource-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 30px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.8);
+      transition: var(--transition);
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .hero-image {
+        height: 220px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 16px;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        padding: 30px 20px;
+        box-shadow: var(--shadow);
+        border-radius: 0 0 12px 12px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      th, td {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div class="container">
+      <a href="https://simonhad.github.io/Simon_Hadush-portfolio/" class="logo">Simon<span>Hadush</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="https://simonhad.github.io/Simon_Hadush-portfolio/">Home</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#objectives">Objectives</a></li>
+        <li><a href="#outline">Outline</a></li>
+        <li><a href="#material">Material</a></li>
+        <li><a href="#accessibility">Accessibility</a></li>
+        <li><a href="#assessment">Assessment</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <p style="color: var(--accent); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 10px;">Capstone Project</p>
+          <h1>Foundations of Artificial Intelligence and Machine Learning</h1>
+          <p class="tagline">An online course design and sample unit instructional material development project, integrating instructional design frameworks, learning theories, multimedia, and accessibility.</p>
+          <div class="hero-buttons">
+            <a href="#material" class="btn btn-primary">View Sample Material</a>
+            <a href="#resources" class="btn btn-outline">Download Files</a>
+          </div>
+        </div>
+        <div class="hero-image"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COURSE OVERVIEW ===== -->
+  <section id="overview">
+    <div class="container">
+      <div class="section-title">
+        <h2>Course Overview</h2>
+        <p>A comprehensive 10-week introductory course on AI and Machine Learning principles, algorithms, and applications.</p>
+      </div>
+      <div class="card">
+        <h3>Course Description</h3>
+        <p>This comprehensive introductory course provides learners with a solid foundation in artificial intelligence and machine learning principles, algorithms, and applications. Over ten weeks, participants develop the skills needed to understand, implement, and evaluate machine learning models across supervised, unsupervised, and deep learning paradigms. The course emphasizes practical application through hands-on coding exercises, real-world case studies, and a culminating capstone project.</p>
+
+        <h3 style="margin-top: 25px;">Target Audience</h3>
+        <p>Early-career data professionals, software developers transitioning to AI roles, graduate students in related fields, and professionals seeking to understand and apply AI/ML techniques in their domains. Prerequisites include basic programming knowledge (preferably Python) and foundational mathematics (calculus, linear algebra, and statistics at an introductory level).</p>
+
+        <h3 style="margin-top: 25px;">Theoretical Foundations</h3>
+        <p>This course integrates multiple learning theories to create a comprehensive learning experience. Behaviorist principles are applied to foundational skill development through structured exercises with immediate feedback. Cognitivist principles guide content organization, advance organizers, and cognitive load management. Constructivist principles inform project-based learning and authentic problem-solving activities. Connectivist principles address the networked nature of AI knowledge, helping learners develop skills in navigating documentation, online resources, and professional communities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SMART LEARNING OBJECTIVES ===== -->
+  <section id="objectives" style="background: var(--white);">
+    <div class="container">
+      <div class="section-title">
+        <h2>SMART Learning Objectives</h2>
+        <p>Upon completion of this course, learners will be able to:</p>
+      </div>
+      <ul class="objective-list">
+        <li><strong>Differentiate</strong> between supervised, unsupervised, and reinforcement learning paradigms, and <strong>select</strong> appropriate algorithms for given problem types and data characteristics. <em>(Analyze)</em></li>
+        <li><strong>Implement</strong> at least five core machine learning algorithms (including linear regression, logistic regression, decision trees, k-means clustering, and neural networks) using Python and standard libraries such as scikit-learn and TensorFlow. <em>(Apply)</em></li>
+        <li><strong>Evaluate</strong> machine learning model performance using appropriate metrics (accuracy, precision, recall, F1-score, ROC-AUC, and others), and <strong>diagnose</strong> issues such as overfitting, underfitting, and data leakage. <em>(Evaluate)</em></li>
+        <li><strong>Design</strong> and <strong>execute</strong> an end-to-end machine learning project—from data preprocessing and exploratory analysis through model selection, training, evaluation, and deployment considerations—on a real-world dataset. <em>(Create)</em></li>
+        <li><strong>Analyze</strong> the ethical, social, and professional implications of AI systems, including bias, fairness, transparency, and privacy concerns, and <strong>apply</strong> responsible AI practices in development workflows. <em>(Analyze)</em></li>
+        <li><strong>Explain</strong> the fundamental concepts of deep learning, including neural network architectures, backpropagation, and optimization algorithms, and <strong>apply</strong> these concepts to simple computer vision or natural language processing tasks. <em>(Understand / Apply)</em></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== MODULE OUTLINE ===== -->
+  <section id="outline">
+    <div class="container">
+      <div class="section-title">
+        <h2>Course Syllabus / Module Outline</h2>
+        <p>10 Units (10 Weeks) – objectives, instructional strategies, and assessment methods.</p>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Unit</th>
+              <th>Title</th>
+              <th>SMART Learning Objectives</th>
+              <th>Instructional Strategies</th>
+              <th>Assessment Methods</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Unit 1</strong></td>
+              <td>Introduction to AI and Machine Learning</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Define artificial intelligence and its subfields with 90% accuracy on a quiz.</li>
+                  <li>Differentiate between AI, ML, and deep learning, providing at least two examples of each.</li>
+                  <li>Identify the machine learning workflow (problem framing, data collection, modeling, evaluation, deployment) in a given scenario.</li>
+                  <li>Set up a Python development environment for ML and verify successful installation of Jupyter, NumPy, Pandas, and scikit-learn.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Interactive video lecture with historical timeline</li>
+                  <li>Discussion forum: "AI in My Domain"</li>
+                  <li>Reading: Industry applications and case studies</li>
+                  <li>Hands-on: Environment setup (Jupyter, libraries)</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Discussion participation (formative)</li>
+                  <li>Environment setup verification (formative)</li>
+                  <li>Unit 1 Quiz (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 2</strong></td>
+              <td>Python for Data Science and Machine Learning</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Write Python code using NumPy for numerical operations, achieving correct results on at least 8 of 10 exercises.</li>
+                  <li>Manipulate data using Pandas DataFrames, including filtering, grouping, and merging.</li>
+                  <li>Create at least three different data visualizations using Matplotlib and Seaborn.</li>
+                  <li>Apply vectorized operations to replace explicit loops in a given code snippet.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Screencast: Python data science libraries</li>
+                  <li>Interactive Jupyter notebook exercises</li>
+                  <li>Code-along sessions</li>
+                  <li>Peer code review</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Python data manipulation exercise (formative)</li>
+                  <li>Data exploration and visualization assignment (summative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 3</strong></td>
+              <td>Data Preprocessing and Exploratory Data Analysis</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Identify and handle missing data, outliers, and inconsistencies in a provided dataset.</li>
+                  <li>Apply feature scaling, normalization, and encoding techniques appropriately.</li>
+                  <li>Conduct exploratory data analysis to uncover at least three patterns or insights.</li>
+                  <li>Split data into training, validation, and test sets using scikit-learn.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Video tutorial: Data cleaning techniques</li>
+                  <li>Case study: Real-world messy dataset</li>
+                  <li>Hands-on lab: EDA workflow</li>
+                  <li>Discussion: Data quality challenges</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>EDA report (summative)</li>
+                  <li>Data preprocessing quiz (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 4</strong></td>
+              <td>Supervised Learning: Regression</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Explain the principles of supervised learning and the difference between regression and classification.</li>
+                  <li>Implement and interpret linear regression models using scikit-learn.</li>
+                  <li>Implement and interpret polynomial and ridge regression, explaining when each is appropriate.</li>
+                  <li>Evaluate regression models using R², MSE, MAE, and RMSE, and select the best model based on these metrics.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Interactive video: Regression fundamentals</li>
+                  <li>Simulation: Gradient descent visualization</li>
+                  <li>Coding exercise: Housing price prediction</li>
+                  <li>Peer review of regression models</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Regression model implementation (summative)</li>
+                  <li>Model evaluation exercise (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 5</strong></td>
+              <td>Supervised Learning: Classification</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Explain classification problems and evaluation metrics.</li>
+                  <li>Implement logistic regression, k-nearest neighbors, and decision trees using scikit-learn.</li>
+                  <li>Apply evaluation metrics: accuracy, precision, recall, F1, ROC-AUC, and interpret confusion matrices.</li>
+                  <li>Diagnose overfitting and underfitting and propose at least two remedies.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Video: Classification algorithms compared</li>
+                  <li>Interactive: Confusion matrix and ROC curves</li>
+                  <li>Case study: Credit risk assessment</li>
+                  <li>Group project planning</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Classification model comparison (summative)</li>
+                  <li>Peer feedback on models (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 6</strong></td>
+              <td>Ensemble Methods and Model Selection</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Explain bagging, boosting, and stacking ensemble methods.</li>
+                  <li>Implement random forests and gradient boosting (XGBoost, LightGBM) on a dataset.</li>
+                  <li>Apply cross-validation and hyperparameter tuning using GridSearchCV or RandomizedSearchCV.</li>
+                  <li>Select the best model using systematic comparison and justify the choice.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Screencast: Ensemble methods explained</li>
+                  <li>Hands-on: Hyperparameter optimization lab</li>
+                  <li>Interactive: Cross-validation visualization</li>
+                  <li>Discussion: When to use which ensemble</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Ensemble model implementation (summative)</li>
+                  <li>Hyperparameter tuning exercise (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 7</strong></td>
+              <td>Unsupervised Learning: Clustering and Dimensionality Reduction</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Explain unsupervised learning principles and contrast with supervised learning.</li>
+                  <li>Implement k-means clustering and hierarchical clustering on a dataset.</li>
+                  <li>Apply PCA for dimensionality reduction and explain the variance explained by each component.</li>
+                  <li>Evaluate clustering using silhouette score and elbow method, selecting optimal number of clusters.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Interactive visualization: Clustering algorithms</li>
+                  <li>Case study: Customer segmentation</li>
+                  <li>Coding exercise: Dimensionality reduction</li>
+                  <li>Peer review</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Clustering analysis report (summative)</li>
+                  <li>Dimensionality reduction exercise (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 8</strong></td>
+              <td>Neural Networks and Deep Learning</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Explain the structure and function of neural networks, including layers, neurons, weights, biases, and activation functions.</li>
+                  <li>Implement a feedforward neural network using TensorFlow/Keras for a classification task, achieving at least 85% accuracy on the provided dataset.</li>
+                  <li>Explain backpropagation and optimization algorithms (SGD, Adam) and their roles in training.</li>
+                  <li>Apply regularization techniques (dropout, batch normalization) to improve model generalization.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Animated video: How neural networks learn</li>
+                  <li>Interactive: Backpropagation visualization</li>
+                  <li>Coding lab: Building a neural network from scratch</li>
+                  <li>Case study: Image classification</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Neural network implementation (summative)</li>
+                  <li>Deep learning quiz (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 9</strong></td>
+              <td>Natural Language Processing and Special Topics</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Explain key NLP concepts: tokenization, embeddings, language models.</li>
+                  <li>Apply text preprocessing and feature extraction (TF-IDF, Word2Vec) to a text corpus.</li>
+                  <li>Implement sentiment analysis and text classification using scikit-learn or TensorFlow.</li>
+                  <li>Explain transformer architecture and large language models, including their impact and limitations.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Video: NLP fundamentals</li>
+                  <li>Hands-on: Text preprocessing lab</li>
+                  <li>Case study: Sentiment analysis project</li>
+                  <li>Discussion: LLMs and their impact</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>NLP project (summative)</li>
+                  <li>Text classification exercise (formative)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Unit 10</strong></td>
+              <td>Ethics, Responsible AI, and Capstone Project</td>
+              <td>
+                By the end of this unit, learners will be able to:
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Analyze bias and fairness in AI systems using at least two case studies.</li>
+                  <li>Apply responsible AI practices: transparency, accountability, privacy.</li>
+                  <li>Identify emerging trends and future directions in AI.</li>
+                  <li>Present and defend a capstone project that demonstrates end-to-end ML pipeline development.</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Video: Ethical dilemmas in AI</li>
+                  <li>Case study: Algorithmic bias analysis</li>
+                  <li>Capstone project development and review</li>
+                  <li>Final presentations</li>
+                </ul>
+              </td>
+              <td>
+                <ul style="padding-left: 18px;">
+                  <li>Ethics reflection paper (summative)</li>
+                  <li>Capstone project presentation (summative)</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SAMPLE INSTRUCTIONAL MATERIAL ===== -->
+  <section id="material" style="background: var(--white);">
+    <div class="container">
+      <div class="section-title">
+        <h2>Sample Instructional Material</h2>
+        <p>Unit 8 – Neural Networks and Deep Learning</p>
+      </div>
+
+      <div class="card">
+        <h3>Interactive Video: "How Neural Networks Learn: A Visual Introduction to Backpropagation"</h3>
+        <p><strong>Tool Used:</strong> Camtasia with embedded interactive quizzes and annotations.</p>
+        <p><strong>Description:</strong> This 15-minute interactive video introduces learners to the fundamental concepts of neural networks and the backpropagation algorithm. It incorporates animated diagrams, dynamic visualizations, color-coded representations of weights and biases, professional voiceover narration, embedded knowledge-check questions, clickable annotations, reflection prompts, full closed captions, and a downloadable PDF transcript.</p>
+
+        <div style="background: #f7fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h4 style="margin-bottom: 10px;">Video Link</h4>
+          <p style="margin-bottom: 0;">Watch the interactive video here: <a href="#video-link" style="color: var(--accent); font-weight: 600;">[Insert video link]</a></p>
+        </div>
+
+        <h4>Video Structure & BOPPPS Mapping</h4>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Content</th>
+                <th>Interactive Element</th>
+                <th>BOPPPS Stage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0:00–2:30</td>
+                <td>Introduction: What is a neural network? Real-world analogy (brain vs. artificial neural network)</td>
+                <td>Pre-assessment poll: "Have you ever used a neural network before?"</td>
+                <td>Bridge-in</td>
+              </tr>
+              <tr>
+                <td>2:30–3:00</td>
+                <td>Learning objectives for this video</td>
+                <td>Objectives displayed on screen</td>
+                <td>Objectives</td>
+              </tr>
+              <tr>
+                <td>3:00–5:00</td>
+                <td>Neural Network Architecture: Layers, neurons, weights, biases, and activation functions</td>
+                <td>Quiz Question 1: "What is the role of an activation function in a neural network?"</td>
+                <td>Participatory Learning</td>
+              </tr>
+              <tr>
+                <td>5:00–8:00</td>
+                <td>Forward Propagation: How input data flows through the network to produce predictions</td>
+                <td>Animated visualization with clickable nodes for detailed explanations</td>
+                <td>Participatory Learning</td>
+              </tr>
+              <tr>
+                <td>8:00–11:00</td>
+                <td>The Loss Function and Backpropagation: Measuring error and propagating it backward through the network</td>
+                <td>Quiz Question 2: "During backpropagation, how is the error distributed to earlier layers?"</td>
+                <td>Participatory Learning</td>
+              </tr>
+              <tr>
+                <td>11:00–13:00</td>
+                <td>Gradient Descent and Optimization: Updating weights to minimize loss</td>
+                <td>Interactive: Adjust learning rate slider to see effect on convergence</td>
+                <td>Participatory Learning</td>
+              </tr>
+              <tr>
+                <td>13:00–14:30</td>
+                <td>Summary and Next Steps: Key takeaways, connection to deep learning, and resources for further study</td>
+                <td>Reflection prompt: "What is one concept from this video you would like to explore further?"</td>
+                <td>Summary</td>
+              </tr>
+              <tr>
+                <td>14:30–15:00</td>
+                <td>Post-assessment: Quick check of key concepts</td>
+                <td>Quiz Question 3: "What is the purpose of backpropagation?"</td>
+                <td>Post-assessment</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 style="margin-top: 30px;">Sample Script Excerpt (0:00–2:30)</h4>
+        <p><strong>Visual:</strong> Animated sequence showing a biological neuron connecting to an artificial neuron.</p>
+        <p><strong>Audio (Narration):</strong> "Welcome to 'How Neural Networks Learn.' In this video, we'll explore the fundamental concepts behind neural networks and the backpropagation algorithm. Think of your brain—it has billions of neurons that communicate through electrical and chemical signals. Artificial neural networks are inspired by this biological structure. Just like your brain learns from experience, a neural network learns from data. But how does it actually learn? That's what we'll discover today. By the end of this video, you'll understand the architecture of a neural network, how data flows forward to make predictions, and how the network adjusts its weights through a process called backpropagation. Let's get started."</p>
+        <p><strong>On-screen text:</strong> "Learning Objectives: 1) Describe neural network architecture. 2) Explain forward propagation. 3) Explain backpropagation and gradient descent."</p>
+
+        <h4 style="margin-top: 30px;">Sample Quiz Questions and Feedback</h4>
+        <div style="background: #f7fafc; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+          <p><strong>Quiz Question 1 (at 5:00):</strong><br>
+          <em>What is the role of an activation function in a neural network?</em></p>
+          <ul style="padding-left: 20px;">
+            <li>A) To initialize the weights randomly</li>
+            <li>B) To introduce non-linearity into the network</li>
+            <li>C) To calculate the loss function</li>
+            <li>D) To update the weights during backpropagation</li>
+          </ul>
+          <p><strong>Correct Answer:</strong> B<br>
+          <strong>Feedback:</strong> Correct! Activation functions like ReLU, sigmoid, and tanh introduce non-linearity, allowing the network to learn complex patterns. Without them, the network would only be able to model linear relationships.<br>
+          <strong>Incorrect Feedback:</strong> Not quite. The activation function's main purpose is to introduce non-linearity. Try again!</p>
+        </div>
+
+        <div style="background: #f7fafc; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+          <p><strong>Quiz Question 2 (at 11:00):</strong><br>
+          <em>During backpropagation, how is the error distributed to earlier layers?</em></p>
+          <ul style="padding-left: 20px;">
+            <li>A) By randomly assigning error to each neuron</li>
+            <li>B) By calculating the gradient of the loss function with respect to each weight</li>
+            <li>C) By re-running forward propagation</li>
+            <li>D) By adjusting the learning rate</li>
+          </ul>
+          <p><strong>Correct Answer:</strong> B<br>
+          <strong>Feedback:</strong> Correct! Backpropagation uses the chain rule to compute gradients, which tell us how much each weight contributed to the error. These gradients are then used to update the weights.</p>
+        </div>
+
+        <h4 style="margin-top: 30px;">Sample Transcript Excerpt (0:00–1:00)</h4>
+        <blockquote style="border-left: 4px solid var(--accent); padding-left: 20px; font-style: italic; color: var(--text-light); margin: 15px 0;">
+          "Welcome to 'How Neural Networks Learn.' In this video, we'll explore the fundamental concepts behind neural networks and the backpropagation algorithm. Think of your brain—it has billions of neurons that communicate through electrical and chemical signals. Artificial neural networks are inspired by this biological structure. Just like your brain learns from experience, a neural network learns from data. But how does it actually learn? That's what we'll discover today."
+        </blockquote>
+
+        <h4 style="margin-top: 30px;">Sample Alt Text for Key Visuals</h4>
+        <div style="background: #f7fafc; padding: 20px; border-radius: 8px; margin: 15px 0;">
+          <p><strong>Diagram 1: Neural Network Architecture</strong><br>
+          <em>Alt text:</em> "Diagram showing a feedforward neural network with three layers. The input layer has three nodes labeled x1, x2, x3. The hidden layer has four nodes labeled h1 through h4. The output layer has two nodes labeled y1 and y2. Arrows indicate weighted connections from each input node to each hidden node, and from each hidden node to each output node. Weights are represented by line thickness."</p>
+          <p style="margin-bottom: 0;"><strong>Diagram 2: Backpropagation Flow</strong><br>
+          <em>Alt text:</em> "Diagram illustrating backpropagation. Arrows show error signal flowing backward from the output layer through the hidden layer to the input layer. Each connection has a gradient value. The loss function is shown at the output, and the chain rule is depicted as a series of multiplications along the backward path."</p>
+        </div>
+
+        <h4 style="margin-top: 30px;">Sample SRT Caption File Excerpt</h4>
+        <pre><code>1
+00:00:00,000 --> 00:00:03,000
+Welcome to "How Neural Networks Learn."
+
+2
+00:00:03,000 --> 00:00:06,000
+In this video, we'll explore the fundamental concepts
+
+3
+00:00:06,000 --> 00:00:09,000
+behind neural networks and the backpropagation algorithm.
+
+4
+00:00:09,000 --> 00:00:12,000
+Think of your brain—it has billions of neurons
+
+5
+00:00:12,000 --> 00:00:15,000
+that communicate through electrical and chemical signals.</code></pre>
+
+        <h4 style="margin-top: 30px;">Keyboard Navigation Testing Note</h4>
+        <p>All interactive elements were tested for keyboard accessibility using NVDA screen reader and keyboard-only navigation. The following elements are fully accessible:</p>
+        <ul style="padding-left: 20px;">
+          <li><strong>Quiz options:</strong> Navigable with Tab, selectable with Enter/Space.</li>
+          <li><strong>Clickable annotations:</strong> Focusable via Tab, activated with Enter.</li>
+          <li><strong>Learning rate slider:</strong> Adjustable with Arrow keys.</li>
+          <li><strong>Video controls:</strong> Play/pause, volume, captions toggle accessible via keyboard.</li>
+          <li><strong>Skip navigation link:</strong> "Skip to main content" available at the top of the video player.</li>
+        </ul>
+
+        <h4 style="margin-top: 30px;">Application of Learning Theories</h4>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Theory</th>
+                <th>Application in Material</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Behaviorism</strong></td>
+                <td>Knowledge-check questions with immediate feedback reinforce correct understanding and correct misconceptions.</td>
+              </tr>
+              <tr>
+                <td><strong>Cognitivism</strong></td>
+                <td>Content organized to manage cognitive load; advance organizers introduce key concepts; connections made to prior knowledge.</td>
+              </tr>
+              <tr>
+                <td><strong>Constructivism</strong></td>
+                <td>Learners actively construct understanding through visualization, interaction, and reflection; real-world analogies support meaning-making.</td>
+              </tr>
+              <tr>
+                <td><strong>Connectivism</strong></td>
+                <td>Resources for further study connect learners to online documentation, research papers, and professional communities.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 style="margin-top: 30px;">Summary of Multimedia Elements</h4>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Purpose</th>
+                <th>Theoretical Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Animated diagrams</td>
+                <td>Visualize abstract neural network operations</td>
+                <td>Dual coding theory; reduces cognitive load (Cognitivism)</td>
+              </tr>
+              <tr>
+                <td>Interactive quiz questions</td>
+                <td>Check understanding and provide immediate feedback</td>
+                <td>Reinforcement (Behaviorism); metacognitive prompts (Cognitivism)</td>
+              </tr>
+              <tr>
+                <td>Learning rate slider</td>
+                <td>Allow exploration of optimization dynamics</td>
+                <td>Active construction of understanding (Constructivism)</td>
+              </tr>
+              <tr>
+                <td>Clickable annotations</td>
+                <td>Provide deeper explanations on demand</td>
+                <td>Scaffolding; learner control (Constructivism/Cognitivism)</td>
+              </tr>
+              <tr>
+                <td>Transcript and captions</td>
+                <td>Support accessibility and multiple representations</td>
+                <td>UDL; multiple means of representation (Universal Design)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACCESSIBILITY AUDIT ===== -->
+  <section id="accessibility">
+    <div class="container">
+      <div class="section-title">
+        <h2>Accessibility Audit Report</h2>
+        <p>WCAG 2.1 AA Compliance &amp; Universal Design for Learning (UDL) Alignment</p>
+      </div>
+
+      <div class="card">
+        <h3>WCAG 2.1 AA Compliance</h3>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>WCAG Principle</th>
+                <th>Guideline</th>
+                <th>Check</th>
+                <th>Status</th>
+                <th>Evidence / Action Taken</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Perceivable</td>
+                <td>1.1.1 Non-text Content</td>
+                <td>All images have descriptive alt text</td>
+                <td>✓ Pass</td>
+                <td>All diagrams include detailed alt text describing neural network architecture, activation functions, and gradient descent paths.</td>
+              </tr>
+              <tr>
+                <td>Perceivable</td>
+                <td>1.2.1 Audio-only and Video-only</td>
+                <td>Transcript provided</td>
+                <td>✓ Pass</td>
+                <td>Downloadable PDF transcript with diagrams and code snippets available.</td>
+              </tr>
+              <tr>
+                <td>Perceivable</td>
+                <td>1.2.2 Captions</td>
+                <td>Captions synchronized with audio</td>
+                <td>✓ Pass</td>
+                <td>Full closed captions using Camtasia's captioning feature, verified for timing accuracy.</td>
+              </tr>
+              <tr>
+                <td>Perceivable</td>
+                <td>1.3.1 Info and Relationships</td>
+                <td>Content structured with headings</td>
+                <td>✓ Pass</td>
+                <td>Video chapters clearly labeled; transcript uses hierarchical heading structure.</td>
+              </tr>
+              <tr>
+                <td>Perceivable</td>
+                <td>1.4.3 Contrast</td>
+                <td>Text has sufficient contrast</td>
+                <td>✓ Pass</td>
+                <td>All on-screen text meets 4.5:1 contrast ratio; color is not the only means of conveying information.</td>
+              </tr>
+              <tr>
+                <td>Operable</td>
+                <td>2.1.1 Keyboard</td>
+                <td>All interactive elements keyboard accessible</td>
+                <td>✓ Pass</td>
+                <td>Quiz interactions, clickable annotations, and slider controls navigable using keyboard (Tab, Enter, Arrow keys).</td>
+              </tr>
+              <tr>
+                <td>Operable</td>
+                <td>2.2.1 Timing Adjustable</td>
+                <td>No time limits on quizzes</td>
+                <td>✓ Pass</td>
+                <td>Interactive questions and activities have no time restrictions.</td>
+              </tr>
+              <tr>
+                <td>Operable</td>
+                <td>2.4.1 Bypass Blocks</td>
+                <td>Skip navigation available</td>
+                <td>✓ Pass</td>
+                <td>Video player includes "skip to main content" option.</td>
+              </tr>
+              <tr>
+                <td>Operable</td>
+                <td>2.4.6 Headings and Labels</td>
+                <td>Descriptive headings used</td>
+                <td>✓ Pass</td>
+                <td>Chapter titles clearly describe content (e.g., "Forward Propagation," "Backpropagation Explained").</td>
+              </tr>
+              <tr>
+                <td>Understandable</td>
+                <td>3.1.1 Language of Page</td>
+                <td>Language specified</td>
+                <td>✓ Pass</td>
+                <td>Video metadata and transcript specify English (en).</td>
+              </tr>
+              <tr>
+                <td>Understandable</td>
+                <td>3.3.2 Labels or Instructions</td>
+                <td>Clear instructions provided</td>
+                <td>✓ Pass</td>
+                <td>Each interactive element includes clear instructions (e.g., "Click the slider to adjust the learning rate").</td>
+              </tr>
+              <tr>
+                <td>Robust</td>
+                <td>4.1.2 Name, Role, Value</td>
+                <td>Interactive elements properly labeled</td>
+                <td>✓ Pass</td>
+                <td>All buttons, sliders, and quiz elements labeled with ARIA attributes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 40px;">Universal Design for Learning (UDL) Alignment</h3>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>UDL Principle</th>
+                <th>Guideline</th>
+                <th>Application in Material</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="3">Multiple Means of Representation</td>
+                <td>Perception</td>
+                <td>Visual (animations), auditory (narration), and textual (transcript) representations provided.</td>
+              </tr>
+              <tr>
+                <td>Language and Symbols</td>
+                <td>Technical terms explained in accessible language; glossary provided.</td>
+              </tr>
+              <tr>
+                <td>Comprehension</td>
+                <td>Concepts scaffolded from simple to complex; prior knowledge activated.</td>
+              </tr>
+              <tr>
+                <td rowspan="3">Multiple Means of Action and Expression</td>
+                <td>Physical Action</td>
+                <td>Keyboard-accessible interactive elements; no fine motor control required.</td>
+              </tr>
+              <tr>
+                <td>Expression and Communication</td>
+                <td>Quiz responses, reflection prompts, and discussion connections allow diverse expression.</td>
+              </tr>
+              <tr>
+                <td>Executive Functions</td>
+                <td>Clear structure; strategic pauses; reflection prompts support metacognition.</td>
+              </tr>
+              <tr>
+                <td rowspan="3">Multiple Means of Engagement</td>
+                <td>Recruiting Interest</td>
+                <td>Real-world analogies; relevance to AI applications; interactive elements.</td>
+              </tr>
+              <tr>
+                <td>Sustaining Effort and Persistence</td>
+                <td>Immediate feedback; manageable segments; clear progress indicators.</td>
+              </tr>
+              <tr>
+                <td>Self-Regulation</td>
+                <td>Self-assessment opportunities; reflection prompts; options for further exploration.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 40px;">Diverse Learner Accommodations</h3>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Learner Need</th>
+                <th>Accommodation Provided</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Visual impairments</td>
+                <td>Audio narration describes all visual content, including diagrams and animations; transcript available.</td>
+              </tr>
+              <tr>
+                <td>Hearing impairments</td>
+                <td>Full closed captions and transcript provided.</td>
+              </tr>
+              <tr>
+                <td>Learning disabilities / cognitive load concerns</td>
+                <td>Content broken into short, manageable segments (2–3 minutes per topic); multiple representations (visual + auditory + text); strategic pauses for processing.</td>
+              </tr>
+              <tr>
+                <td>Non-native English speakers</td>
+                <td>Transcript available for translation; clear, accessible language used; visual aids support comprehension of technical terms; glossary provided.</td>
+              </tr>
+              <tr>
+                <td>Attention difficulties</td>
+                <td>Video divided into short chapters; interactive elements maintain engagement; total duration under 15 minutes with clear transitions.</td>
+              </tr>
+              <tr>
+                <td>Motor impairments</td>
+                <td>All interactive elements operable via keyboard; no fine motor control required.</td>
+              </tr>
+              <tr>
+                <td>Mathematics anxiety</td>
+                <td>Visual and conceptual explanations precede mathematical formulations; interactive visualizations reduce abstract barriers.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 40px;">Recommendations for Improvement</h3>
+        <ol style="padding-left: 20px; color: var(--text-light);">
+          <li>Add audio descriptions for complex visual elements not already described in narration (e.g., detailed mathematical notation).</li>
+          <li>Provide a text-based alternative for the interactive quiz for learners who cannot access the video player.</li>
+          <li>Offer a slower playback option for learners who need more time to process complex visual information.</li>
+          <li>Create supplementary written tutorials with static diagrams for learners who prefer text-based learning.</li>
+          <li>Add a code-along version where learners can execute the neural network code in their own environment alongside the video.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ASSESSMENT PLAN ===== -->
+  <section id="assessment" style="background: var(--white);">
+    <div class="container">
+      <div class="section-title">
+        <h2>Assessment Plan &amp; Rubrics</h2>
+        <p>Formative and summative assessments aligned with learning objectives.</p>
+      </div>
+
+      <div class="card">
+        <h3>Formative Assessments</h3>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Assessment</th>
+                <th>Frequency</th>
+                <th>Purpose</th>
+                <th>Format</th>
+                <th>Theoretical Basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Knowledge Checks</td>
+                <td>Embedded in each unit video</td>
+                <td>Gauge comprehension of key concepts; identify misconceptions early</td>
+                <td>Multiple-choice and short-answer questions with immediate feedback and explanations</td>
+                <td>Behaviorism (reinforcement); Cognitivism (metacognition)</td>
+              </tr>
+              <tr>
+                <td>Discussion Participation</td>
+                <td>Weekly</td>
+                <td>Encourage peer learning, reflection, and application of concepts to real-world contexts</td>
+                <td>Graded discussion forum with instructor prompts and peer responses</td>
+                <td>Constructivism (social construction); Connectivism (networked learning)</td>
+              </tr>
+              <tr>
+                <td>Peer Feedback Activities</td>
+                <td>Units 5, 7, 9</td>
+                <td>Develop critical evaluation skills; expose learners to diverse approaches</td>
+                <td>Structured peer review using rubrics for code and analysis</td>
+                <td>Constructivism (collaboration); Cognitivism (metacognitive development)</td>
+              </tr>
+              <tr>
+                <td>Coding Exercises</td>
+                <td>Units 2–9</td>
+                <td>Apply skills in low-stakes environment; build confidence incrementally</td>
+                <td>Jupyter notebook-based exercises with automated and instructor feedback</td>
+                <td>Behaviorism (practice and reinforcement); Cognitivism (skill development)</td>
+              </tr>
+              <tr>
+                <td>Self-Assessment Quizzes</td>
+                <td>End of each unit</td>
+                <td>Promote metacognition and self-directed learning</td>
+                <td>Unscored quizzes with answer explanations and links to resources</td>
+                <td>Cognitivism (metacognition); Constructivism (self-directed learning)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 40px;">Summative Assessments</h3>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Assessment</th>
+                <th>Weight</th>
+                <th>Unit</th>
+                <th>Description</th>
+                <th>Rubric Criteria</th>
+                <th>Theoretical Basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Data Exploration and Visualization Assignment</td>
+                <td>10%</td>
+                <td>Unit 2</td>
+                <td>Comprehensive EDA on a provided dataset with visualizations and insights</td>
+                <td>Data quality, visualization quality, insight generation, code quality, professionalism</td>
+                <td>Cognitivism (information processing); Constructivism (authentic task)</td>
+              </tr>
+              <tr>
+                <td>EDA and Preprocessing Report</td>
+                <td>10%</td>
+                <td>Unit 3</td>
+                <td>Detailed report on data cleaning, preprocessing, and exploratory analysis</td>
+                <td>Thoroughness, technique selection, justification, presentation</td>
+                <td>Cognitivism (organization); Constructivism (meaning-making)</td>
+              </tr>
+              <tr>
+                <td>Regression Model Implementation</td>
+                <td>10%</td>
+                <td>Unit 4</td>
+                <td>Implementation and evaluation of regression models on a real dataset</td>
+                <td>Model correctness, evaluation thoroughness, interpretation, code quality</td>
+                <td>Behaviorism (skill demonstration); Cognitivism (application)</td>
+              </tr>
+              <tr>
+                <td>Classification Model Comparison</td>
+                <td>10%</td>
+                <td>Unit 5</td>
+                <td>Comparison of multiple classification algorithms with evaluation</td>
+                <td>Algorithm selection, evaluation metrics, comparison analysis, recommendations</td>
+                <td>Cognitivism (analysis); Constructivism (decision-making)</td>
+              </tr>
+              <tr>
+                <td>Ensemble Model Implementation</td>
+                <td>10%</td>
+                <td>Unit 6</td>
+                <td>Implementation of ensemble methods with hyperparameter tuning</td>
+                <td>Implementation quality, tuning process, performance improvement, documentation</td>
+                <td>Cognitivism (strategic thinking); Constructivism (problem-solving)</td>
+              </tr>
+              <tr>
+                <td>Clustering Analysis Report</td>
+                <td>10%</td>
+                <td>Unit 7</td>
+                <td>Clustering analysis with evaluation and interpretation</td>
+                <td>Technique selection, evaluation metrics, interpretation, visualization</td>
+                <td>Constructivism (meaning construction); Cognitivism (analysis)</td>
+              </tr>
+              <tr>
+                <td>Neural Network Implementation</td>
+                <td>10%</td>
+                <td>Unit 8</td>
+                <td>Implementation of a neural network for a classification task</td>
+                <td>Architecture design, implementation, training process, performance</td>
+                <td>Constructivism (active construction); Cognitivism (strategic application)</td>
+              </tr>
+              <tr>
+                <td>NLP Project</td>
+                <td>10%</td>
+                <td>Unit 9</td>
+                <td>Text classification or sentiment analysis project</td>
+                <td>Preprocessing, feature extraction, model selection, evaluation, insights</td>
+                <td>Constructivism (authentic task); Connectivism (resource navigation)</td>
+              </tr>
+              <tr>
+                <td>Capstone Project: End-to-End ML Pipeline</td>
+                <td>20%</td>
+                <td>Unit 10</td>
+                <td>Complete machine learning project from problem framing to deployment recommendations</td>
+                <td>Problem framing, data work, model selection, evaluation, ethical considerations, presentation</td>
+                <td>All theories integrated; authentic, comprehensive application</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 40px;">Scoring Rubric (Sample: Neural Network Implementation)</h3>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Criteria</th>
+                <th>Exemplary (4)</th>
+                <th>Proficient (3)</th>
+                <th>Developing (2)</th>
+                <th>Beginning (1)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Network Architecture</td>
+                <td>Architecture is well-justified with clear rationale for layer sizes, activation functions, and regularization</td>
+                <td>Architecture is appropriate with basic justification</td>
+                <td>Architecture is functional but lacks justification</td>
+                <td>Architecture is inappropriate or incomplete</td>
+              </tr>
+              <tr>
+                <td>Implementation Quality</td>
+                <td>Code is clean, well-documented, efficient, and follows best practices</td>
+                <td>Code is functional with adequate documentation</td>
+                <td>Code works but has issues with style or efficiency</td>
+                <td>Code does not function correctly</td>
+              </tr>
+              <tr>
+                <td>Training Process</td>
+                <td>Training is well-monitored with clear loss/accuracy curves; appropriate learning rate and batch size selected</td>
+                <td>Training is monitored with basic metrics</td>
+                <td>Training has issues (e.g., convergence problems)</td>
+                <td>Training process is not properly executed</td>
+              </tr>
+              <tr>
+                <td>Model Evaluation</td>
+                <td>Comprehensive evaluation using multiple metrics; clear interpretation of results; identification of strengths and limitations</td>
+                <td>Basic evaluation with interpretation</td>
+                <td>Limited evaluation or unclear interpretation</td>
+                <td>No meaningful evaluation</td>
+              </tr>
+              <tr>
+                <td>Reflection and Insights</td>
+                <td>Thoughtful reflection on challenges, decisions, and learning; clear connection to broader concepts</td>
+                <td>Basic reflection on the process</td>
+                <td>Minimal reflection</td>
+                <td>No reflection provided</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEEDBACK STRATEGY ===== -->
+  <section id="feedback">
+    <div class="container">
+      <div class="section-title">
+        <h2>Feedback Strategy Reflection</h2>
+        <p>How feedback will be utilized to improve course design, enhance learner engagement, and support continuous improvement.</p>
+      </div>
+
+      <div class="card">
+        <h3>1. Feedback for Learners (Formative and Summative)</h3>
+        <p>Feedback in this AI and Machine Learning course is designed to be timely, specific, and actionable—critical in a field where misconceptions can compound rapidly. For formative assessments, I provide immediate automated feedback on coding exercises and knowledge checks, explaining not only what is incorrect but also why and how to correct it. For programming assignments, I use a combination of automated testing (to verify functionality) and human review (to assess code quality, design decisions, and reasoning).</p>
+        <p>For summative assessments, I use rubrics to provide structured feedback that addresses each criterion. Beyond the rubric scores, I include narrative comments that celebrate strengths and offer concrete suggestions for improvement. In a field like machine learning where "there is no single right answer," this dual approach—rubric scoring plus narrative feedback—ensures learners understand both their performance level and the specific steps they can take to grow.</p>
+
+        <h3 style="margin-top: 25px;">2. Feedback from Learners (Course Improvement)</h3>
+        <p>Learner feedback is systematically collected through multiple channels:</p>
+        <ul style="padding-left: 20px; color: var(--text-light);">
+          <li><strong>End-of-unit pulse checks:</strong> Brief surveys asking learners to rate their confidence with the material, identify challenging concepts, and suggest improvements.</li>
+          <li><strong>Mid-course evaluation:</strong> A comprehensive survey at the end of Unit 5 to identify areas for adjustment before the second half of the course.</li>
+          <li><strong>End-of-course evaluation:</strong> Detailed survey addressing all aspects of the course design, materials, and facilitation.</li>
+        </ul>
+
+        <h3 style="margin-top: 25px;">3. Peer Feedback Mechanisms</h3>
+        <p>Structured peer feedback activities are incorporated in Units 5, 7, and 9, using clear rubrics to guide evaluation. This serves multiple purposes: it reduces the instructor's feedback burden, exposes learners to diverse approaches, and develops critical evaluation skills.</p>
+
+        <h3 style="margin-top: 25px;">4. Data-Driven Continuous Improvement</h3>
+        <p>I analyze assessment data to identify patterns of learner difficulty. For example:</p>
+        <ul style="padding-left: 20px; color: var(--text-light);">
+          <li>If multiple learners struggle with a particular quiz question about backpropagation, I review whether the instructional materials adequately explain the concept.</li>
+          <li>If learners consistently perform poorly on a specific coding exercise, I may need to provide additional scaffolding or practice opportunities.</li>
+          <li>If discussion forums show recurring questions about a topic, I create supplementary resources.</li>
+        </ul>
+        <p>This analysis drives iterative refinements to course content, activities, and assessments.</p>
+
+        <h3 style="margin-top: 25px;">5. Instructor Self-Reflection</h3>
+        <p>I maintain a design journal throughout the course, documenting what worked well and why, what could be improved and how, unexpected challenges and how they were addressed, and observations about learner engagement and understanding.</p>
+
+        <h3 style="margin-top: 25px;">6. Closing the Feedback Loop</h3>
+        <p>I communicate to learners how their feedback has been incorporated. When learners see their suggestions implemented, they feel valued and more engaged. I share a "You Said, We Did" summary after each course iteration, demonstrating responsiveness and building trust.</p>
+
+        <h3 style="margin-top: 25px;">7. Integration of Learning Theories in Feedback</h3>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Theory</th>
+                <th>Application in Feedback Strategy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Behaviorism</strong></td>
+                <td>Immediate feedback on quizzes and exercises reinforces correct responses and corrects errors.</td>
+              </tr>
+              <tr>
+                <td><strong>Cognitivism</strong></td>
+                <td>Explanatory feedback helps learners understand concepts; metacognitive prompts develop self-regulation.</td>
+              </tr>
+              <tr>
+                <td><strong>Constructivism</strong></td>
+                <td>Peer feedback and reflective prompts support co-construction of knowledge.</td>
+              </tr>
+              <tr>
+                <td><strong>Connectivism</strong></td>
+                <td>Feedback directs learners to additional resources and networks for further exploration.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DOWNLOADABLE RESOURCES ===== -->
+  <section id="resources" style="background: var(--white);">
+    <div class="container">
+      <div class="section-title">
+        <h2>Downloadable Resources</h2>
+        <p>All project files and supplementary materials.</p>
+      </div>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <i class="fas fa-file-pdf"></i>
+          <h4>Full Transcript</h4>
+          <p>Download the complete PDF transcript with diagrams and code snippets.</p>
+          <a href="#transcript-link" class="btn btn-primary btn-small" style="margin-top: 15px;">Download PDF</a>
+        </div>
+        <div class="resource-card">
+          <i class="fas fa-closed-captioning"></i>
+          <h4>Caption File (SRT)</h4>
+          <p>Download the synchronized caption file for the interactive video.</p>
+          <a href="#captions-link" class="btn btn-primary btn-small" style="margin-top: 15px;">Download SRT</a>
+        </div>
+        <div class="resource-card">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h4>Presentation Slides</h4>
+          <p>Download the slide deck used for the capstone project presentation.</p>
+          <a href="#slides-link" class="btn btn-primary btn-small" style="margin-top: 15px;">Download Slides</a>
+        </div>
+        <div class="resource-card">
+          <i class="fas fa-video"></i>
+          <h4>Interactive Video</h4>
+          <p>Watch the full interactive video: "How Neural Networks Learn."</p>
+          <a href="#video-link" class="btn btn-primary btn-small" style="margin-top: 15px;">Watch Video</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Simon Hadush. All rights reserved. Designed with care.</p>
+      <p style="margin-top: 10px;">
+        <a href="https://simonhad.github.io/Simon_Hadush-portfolio/">Back to Portfolio</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Mobile Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked (on mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Accordion Functionality
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.classList.toggle('active');
+        const body = header.nextElementSibling;
+        body.classList.toggle('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
